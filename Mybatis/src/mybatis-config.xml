@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration SYSTEM "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+    <!-- 加载properties文件 -->
+    <properties resource="db.properties"></properties>
+
+
+
+    <!-- 自定义数据类型的别名 -->
+    
+    <typeAliases>
+        <!-- 对某一个类进行取别名   typeAlias
+            type: 数据类型:  包名.类名
+            alias: 别名
+        -->
+        <!-- <typeAlias type="pojo.User" alias="user"/> -->
+       
+       
+       <!-- 一次性给某个包下所有的类取别名   package
+           name: 包名
+                                别名默认为类名或者类名第一个字母小写
+             User -  User  或者  user
+             Emp  -  Emp  或者  emp
+       -->
+       <package name="pojo"  />
+    </typeAliases>
+
+  <!-- 配置运行环境:设置数据库连接 ,default：使用哪一个数据库连接-->
+  <!-- 数据库的环境   default="使用哪个环境" -->
+       <environments  default="oracle">
+             <!-- 具体的数据库环境 -->
+       		<environment id="oracle">
+       			<!-- 配置事务  
+       					JDBC:在代码中手动提交事务：sqlsession.commit()    增删改
+       					Managed:MyBatis自己不负责事务，交给其他容器来控制：比如Spring		
+       			 -->
+       			<transactionManager type="JDBC"></transactionManager>
+       			<!-- 
+       				配置数据源
+       					type: unpooled: 每次请求都创建sessionn和关闭sessio，速度比较慢
+       							  pooled:采用连接池
+       							  jndi:使用其他容器的数据源：比如Spring的数据源
+       			 -->
+       			<dataSource type="pooled">
+       				<property name="driver" value="${driverClass}"/>
+       				<property name="url" value="${url}"/>
+       				<property name="username" value="${user}"/>
+       				<property name="password" value="${pwd}"/>
+       			</dataSource>
+       		</environment>
+       		
+       		
+       </environments>
+
+		<!--映射文件  -->
+		<mappers>
+		  <!-- 找的是Sql映射文件的相对路径 
+		      resource: 找的是Sql映射文件的位置, 使用/进行分割
+		  -->
+		 <!--  <mapper resource="dao/UserMapper.xml"/> -->
+		  
+		  
+		 <!--  <mapper  url="绝对路径"/> -->
+		 
+		 
+		 <!-- 如果sql映射文件域Mapper接口位于同一个包下,Sql映射文件名与Mapper接口名一样: 有下面的写法
+		    class写的是  Mapper接口的包.类名
+		  -->
+		 <!-- <mapper class="dao.UserMapper"/> -->
+		 
+		 <!--如果sql映射文件域Mapper接口位于同一个包下,Sql映射文件名与Mapper接口名一样,  一次性加载某个包下所有的sql映射文件
+		  name: 包名
+		  -->
+		  <mapper resource="com/zhiling/mybatis/dao/UserMapper.xml"/>
+		    
+		</mappers>                  
+</configuration>

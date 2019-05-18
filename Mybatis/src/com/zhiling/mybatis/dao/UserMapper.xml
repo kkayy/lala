@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!--namespace: 命名空间, 每一个sql映射文件的namespace要唯一  
+    在以后,这个namespace特殊写法
+-->
+<mapper namespace="com.zhiling.mybatis.dao.UserMapper">
+	<!-- 写sql 
+	   查询: 使用<select>
+	 修改: <update>
+	 添加: <insert>
+	 删除: <delete>
+	-->
+	<!-- id: statement的唯一标示符 , 直接为dao层方法名
+	   parameterType: 输入参数类型, 如果是基本数据类型, 可以省略
+	   resultType: 返回值类型, 输出参数类型  自定义类型: 包名.类名
+	-->
+	<select id="queryByIdAndPwd" parameterType="com.zhiling.mybatis.pojo.UserDemo"  resultType="com.zhiling.mybatis.pojo.User">
+	       select *  from t_user where id = #{user.id} and pwd=#{user.pwd}
+	</select>
+	<!-- <insert id="add" parameterType="pojo.Customer">
+	INSERT INTO T_CUSTOMER VALUES(seq_c.nextval,#{cname},#{gender},to_date(#{birthday},'yyyy-MM-dd'),#{cellphone},#{email},#{description})
+	</insert>
+	<update id="update" parameterType="pojo.Customer">
+	update T_CUSTOMER set gender=#{gender} where cid=#{cid}
+	
+	</update> -->
+	
+	
+</mapper>
